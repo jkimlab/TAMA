@@ -56,7 +56,15 @@ Download and install
         docker run -it [image_name] /bin/bash
 
 
-* Prepare databases
+* Running TAMA with an example dataset and an example reference database
+
+        ./setup.pl --example
+        bash Example_run.cmd.sh
+        * (Please check!) This requires more than 30GB of memory.
+        * This command file generates an example reference database and runs TAMA with an example dataset.  
+
+
+* Setting the integrated TAMA databases
 
         [ Download CLARK, Kraken, and Centrifuge databases ]
         * 6 taxonomic rank of database is provided for the CLARK (default: species) 
@@ -65,10 +73,8 @@ Download and install
         * If you want to download the database of another taxonomic rank, please add taxonomic rank options
         (example) target taxonomic rank: species, genus, phylum 
         ./setup.pl --db --species --genus --phylum
-        
-        [ Prepare example datasets ]
-        ./setup.pl --example
 
+        
 * Before downloading the database, please check the required disk space 
 (To download and set the databases, you need to prepare about twice as much storage space.)
 
@@ -82,16 +88,20 @@ Download and install
 | Centrifuge | 9.6 GB |
 
 
-Run TAMA
+Running TAMA
 -----------------
 
-* Run TAMA with example dataset
+* Running TAMA with example datasets and the integrated TAMA database 
+        
+        bash Run_TAMA.cmd.sh
+        * Before running this command, you have to set the integrated TAMA database.
+        * How to set the integrated TAMA database is described above.
+
+
+* Options of running TAMA
 
         ./TAMA.pl -p 30 -o ./ExampleTest --param examples/params.example -t True
-
-
-* Run TAMA perl script
-
+        
         Usage: ./TAMA.pl [option] --param param.txt 
         Options:
         	-p		The number of threads  (default: 1)
@@ -104,6 +114,8 @@ Run TAMA
         
 
 * To run TAMA, you need to prepare params file
+
+        * You can see detailed options in the "params" file. 
 
         ### Example of parameter file 
         # Each line has 'PARAMETERNAME' and 'VALUE', they concatenate by '='
@@ -126,10 +138,10 @@ Run TAMA
         # You can use one taxonomic rank from species, genus, family, order, class, and phylum.
         # (default: species) 
         $RANK=species
-        # META-THRESHOLD parameter is the filtering threshold of meta-analysis. 
+        # META-THRESHOLD parameter is the filtering threshold of meta-analysis for abundance estimation. 
         # You can use a positive number between 0 and 1. 
         # If the bigger threshold is used then the more strict filtering of meta-analysis will be done. 
-        # (default: 0)
+        # (default: 0.34)
         $META-THRESHOLD=
         # WEIGHT-CLARK parameter is the weight (or confidence level) of CLARK results for meta-analysis. 
         # You can use a positive number between 0 and 1. 
@@ -228,6 +240,17 @@ TAMA output
         2. The second line has information of 'unclassified reads'
         3. From the third line, there are results of predicted species (in the reference database) from 'classified reads'
         
+        - Example: 
+                Scientific name	Taxonomy ID	Genome size	Ratio	# of Read count	# of Total read	Abundance
+                NA	NA	NA	8.4622056739089e-05	4	47269	-
+                Buchnera aphidicola	9	1722047	0.931223423385305	44018	47269	0.776485940413685
+                Lysobacter enzymogenes	69	451961	0.0354354862594935	1675	47269	0.11258023255361
+                Cellulomonas gilvus	11	430464	0.033256468298462	1572	47269	0.110933827032704
+        
+
+Create used customized reference database
+-----------------
+
 
 Third party tools
 -----------------
