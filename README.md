@@ -251,7 +251,7 @@ TAMA output
                 Cellulomonas gilvus	11	430464	0.033256468298462	1572	47269	0.110933827032704
         
 
-Create used customized reference database
+Creating custom reference database
 -----------------
 * Creating a custom database with example reference set
         
