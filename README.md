@@ -269,7 +269,7 @@ Creating custom reference database
           Enter the NCBI names.dmp file has the information of scientific names.
         -nodes     <nodes.dmp>
           Enter the NCBI nodes.dmp file has the information of taxonomy tree.
-        -o | -out  <output directory name>  A directory with this name will be created into '[path of TAMA]/DB'
+        -o | -out  <output directory name>  A directory with this name will be created into '[path of TAMA]/DB'.
         -p | -cpu  <num of threads>
         -rank      <target taxonomic rank>
           Select one from species(default), genus, family, order, class, and phylum.
