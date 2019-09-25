@@ -73,7 +73,7 @@ Download and install
         [ Download CLARK, Kraken, and Centrifuge databases ]
         * 6 taxonomic ranks of database are provided for the CLARK (default: species) 
         
-        ""./setup.pl --db (or ./setup.pl --db --species)""
+        ./setup.pl --db (or ./setup.pl --db --species)
       
       
         * If you want to download the database of another taxonomic rank, 
@@ -249,7 +249,8 @@ TAMA output
             (7) Abundance: relative species abundance of this taxon
             
         2. The second line has information of 'unclassified reads'
-        3. From the third line, there are results of predicted species (in the reference database) from 'classified reads'
+        3. From the third line, there are results of predicted species (in the reference database) 
+           from 'classified reads'
         
         - Example: 
                 Scientific name	Taxonomy ID	Genome size	Ratio	# of Read count	# of Total read	Abundance
