@@ -54,7 +54,13 @@ Download and install
         
         [Run a container]
         docker run -it [image_name] /bin/bash
+        
 
+    * (Please check !) When you finish the installation, please add a path of jellyfish to PATH.
+      If you miss it, every process associated with Kraken could be not appropriately worked, 
+      including creating database and taxonomy analysis.
+
+        
 
 * Running TAMA with an example dataset and an example reference database
 
@@ -70,16 +76,15 @@ Download and install
 
 * Setting the integrated TAMA databases
 
-        [ Download CLARK, Kraken, and Centrifuge databases ]
-        * In the case of CLARK, the six databases of different taxonomic ranks are provided.
-          (default: species) 
-        
+        [ Downloading and setting the integrated TAMA database ]
         ./setup.pl --db (or ./setup.pl --db --species)
-      
-      
-        * If you want to download the database of another taxonomic rank, 
+        
+        * In the case of CLARK, the independent database is used for each taxonomic rank.
+          So, the six databases of different taxonomic ranks are provided. (default: species) 
+        * If you want to analyze with other taxonomic ranks,
+          you need to download additional databases using taxonomic rank options. 
           please add taxonomic rank options
-          (example) target taxonomic rank: species, genus, phylum 
+        * Example: target taxonomic rank: species, genus, phylum 
         
         ./setup.pl --db --species --genus --phylum
 
