@@ -71,7 +71,8 @@ Download and install
 * Setting the integrated TAMA databases
 
         [ Download CLARK, Kraken, and Centrifuge databases ]
-        * 6 taxonomic ranks of database are provided for the CLARK (default: species) 
+        * In the case of CLARK, the six databases of different taxonomic ranks are provided.
+          (default: species) 
         
         ./setup.pl --db (or ./setup.pl --db --species)
       
