@@ -22,7 +22,7 @@ System requirements (tested versions)
         Based on the species rank anlaysis, using the included example dataset,
         - Disk: (approximately) 300GB 
                 * CLARK: 88GB, Kraken: 188GB, Centrifuge: 9.6GB
-        - Memory: (approximately) 160GB 
+        - Memory: (approximately) 185GB 
                 * This large memory is required for running the taxonomy analysis tools,
                   especially CLARK and Kraken
         
