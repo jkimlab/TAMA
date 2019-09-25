@@ -1,0 +1,51 @@
+### Example of parameter file 
+# each line has 'PARAMETERNAME' and 'VALUE', they concatenate by '='
+# PARAMETERNAME is started by '$' symbol
+# Please do not change the 'PARAMETERNAME'
+# You can use your input files or options by changing the 'VALUE' after '=' symbol
+
+[Project]
+# PROJECTNAME parameter is the name of your project using followed all input datasets. Multiple datasets could be included in the project and analyzed in a single run. A directory with this name is created in the output directory.
+$PROJECTNAME=TEST
+
+[Basic_options]
+# TOOL parameter has to get a list of taxonomy analysis tools. You can use one and more tools for your analysis from CLARK, centrifuge, and kraken. (default: CLARK,centrifuge,kraken)
+$TOOL=CLARK,centrifuge,kraken
+# RANK parameter is targeted taxonomic rank of analysis. You can use one taxonomic rank from species, genus, family, order, class, and phylum. (default: species) 
+$RANK=species
+# WEIGHT-CLARK parameter is the weight (or confidence level) of CLARK results for meta-analysis. You can use a positive number between 0 and 1. (default: 0.9374)
+$WEIGHT-CLARK=
+# WEIGHT-centrifuge parameter is the weight (or confidence level) of centrifuge results for meta-analysis. You can use a positive number between 0 and 1. (default: 0.9600)
+$WEIGHT-centrifuge=
+# WEIGHT-kraken parameter is the weight (or confidence level) of kraken results for meta-analysis. You can use a positive number between 0 and 1. (default: 0.9362)
+$WEIGHT-kraken=
+# META-THRESHOLD parameter is the filtering threshold of meta-analysis for abundance estimation. You can use a positive number between 0 and 1. If the bigger threshold is used then the more strict filtering of meta-analysis will be done. (default: 0.34)
+$META-THRESHOLD=
+
+[Database]
+# DBNAME parameter is the directory name which has CLARK, kraken, centrifuge, and taxonomy_data directory and this directory have to be in 'DB' directory of TAMA package. Each directory (CLARK, kraken, and centrifuge) should have their database files. (default: tama)
+$DBNAME=tama
+
+[Input]
+# You need to separate each dataset with '>' symbol. The name of each dataset should be described after '>'. The dataset could have multiple number of inpu sequence files. All the sequence files will be treated as an input to the current dataset until the next '>' symbol.
+>sample1
+# PAIRED1 and PAIRED2 parameter are the forward and reverse strand reads of a pair of paired-end sequencing read. If you have multiple sequence files, you should write a list of files by concatenating ',' or write them in multiple lines.
+$PAIRED1=examples/sample1.1.fq
+$PAIRED2=examples/sample1.2.fq
+$PAIRED1=
+$PAIRED2=
+# SINGLE parameter is the single-end read file. If you have multiple sequence files, you should write a list of files by concatenating ',' or write them in multiple lines.
+$SINGLE=
+
+>sample2
+$PAIRED1=examples/sample2.1.fq
+$PAIRED2=examples/sample2.2.fq
+$SINGLE=
+
+[Preprocessing]
+# TRIMMOMATIC-RUN parameter get whether to execute read trimming process or not. If you want to do the read trimming process, you should write 'true', or not you should write 'false'. (default: true)
+$TRIMMOMATIC-RUN=true
+# TRIMMOMATIC-OPTION parameter is the running options of the Trimmomatic program. (default: AVGQUAL:2 LEADING:3 TRAILING:3)
+$TRIMMOMATIC-OPTION=
+# BAYESHAMMER-RUN parameter get whether to execute read error correction process or not. If you want to do the read error correction process, you should write 'true', or not you should write 'false'. (default: true)
+$BAYESHAMMER-RUN=true

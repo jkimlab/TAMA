@@ -1,0 +1,116 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+use FindBin qw($Bin);
+use Getopt::Long;
+use File::Basename;
+use Cwd 'abs_path';
+
+## Basic variables
+my $clark_path = abs_path("$Bin/../tools/CLARKSCV1.2.6");
+my $db_path = abs_path("$Bin/../DB");
+my $link_file;
+my $clark_k = 31;
+my $taxonomy_rank;
+## Input
+my $module_params;
+my $cpu;
+my $project;
+my $db_name;
+my $db_seq;
+my $in_single_list;
+my $in_paired1_list;
+my $in_paired2_list;
+my $single_result_list;
+my $paired_result_list;
+my %hs_prefix=();
+my %hs_taxonomy = ();
+foreach my $t ("species","genus","family","order","class","phylum"){
+		$hs_taxonomy{$t} = 1;
+}
+my $options = GetOptions(
+		"params=s" => \$module_params,
+		"cpu=i" => \$cpu,
+);
+if(!defined($module_params)){
+		print "# Error: There is no parameters.\n";
+		my $src = basename($0);
+		print "\tUsage: $src -params <module params> -cpu <number of threads>\n\n";
+		exit;
+}
+if(!defined($cpu)){ $cpu=1; }
+$module_params = abs_path("$module_params");
+my $out_dir = "";
+my ($file1, $file2) = ("", "");
+my $data_type = "";
+chdir("$clark_path");
+open(FP, "$module_params");
+while(<FP>){
+	chomp;
+	if($_ =~ /^RANK=(\S+)/){
+		$taxonomy_rank = lc($1);
+#		$link_file = "$db_path/taxonomy_data/$taxonomy_rank.link";
+	}
+	if($_ =~ /^DBNAME=(\S+)/){
+		my $db_dir = $1;
+		$link_file = "$db_path/$db_dir/taxonomy_data/$taxonomy_rank.link";
+		$db_path .= "/$db_dir/CLARK";
+		`echo -T $db_path/targets.txt > .settings`;
+		my $db_rank = "";
+		if($taxonomy_rank eq "species"){ $db_rank = "custom_0"; }
+		elsif($taxonomy_rank eq "genus"){ $db_rank = "custom_1"; }
+		elsif($taxonomy_rank eq "family"){ $db_rank = "custom_2"; }
+		elsif($taxonomy_rank eq "order"){ $db_rank = "custom_3"; }
+		elsif($taxonomy_rank eq "class"){ $db_rank = "custom_4"; }
+		elsif($taxonomy_rank eq "phylum"){ $db_rank = "custom_5"; }
+		`echo -D $db_path/$db_rank >> .settings`;
+=pod
+		if($db_dir eq "tama"){
+			`perl $Bin/CLARK_maketarget.pl $taxonomy_rank`;
+			my $db_rank = "";
+			if($taxonomy_rank eq "species"){ $db_rank = "custom_0"; }
+			elsif($taxonomy_rank eq "genus"){ $db_rank = "custom_1"; }
+			elsif($taxonomy_rank eq "family"){ $db_rank = "custom_2"; }
+			elsif($taxonomy_rank eq "order"){ $db_rank = "custom_3"; }
+			elsif($taxonomy_rank eq "class"){ $db_rank = "custom_4"; }
+			elsif($taxonomy_rank eq "phylum"){ $db_rank = "custom_5"; }
+			`echo -T $db_path/targets.txt > .settings`;
+			`echo -D $db_path/$db_rank >> .settings`;
+		}
+		else{
+			`./set_targets.sh $db_path custom --$taxonomy_rank`;
+		}
+=cut
+	}
+	if($_ =~ /^>(\S+)/){ 
+		$out_dir = abs_path("$1/CLARK");
+		`mkdir -p $out_dir`;
+	}
+	if($_ =~ /^SINGLE=(\S+)/){
+		if(-f $1){
+			print STDERR "\t[CMD] ./classify_metagenome.sh -k $clark_k -O $1 -R $out_dir/S.result -n $cpu -m 0\n";
+			`./classify_metagenome.sh -k $clark_k -O $1 -R $out_dir/S.result -n $cpu -m 0`;
+			$data_type = "S";
+		}
+	}
+	if($_ =~ /^PAIRED1=(\S+)/){
+		if(-f $1){ $file1 = $1; }
+	}
+	if($_ =~ /^PAIRED2=(\S+)/){
+		if(-f $file1 && -f $1){
+			$file2 = $1;
+			print STDERR "\t[CMD] ./classify_metagenome.sh -k $clark_k -P $file1 $file2 -R $out_dir/P.result -n $cpu -m 0\n";
+			`./classify_metagenome.sh -k $clark_k -P $file1 $file2 -R $out_dir/P.result -n $cpu -m 0`;
+			$data_type .= "P";
+		}
+	}
+}
+close(FP);
+if($data_type eq "S"){ `mv $out_dir/S.result.csv $out_dir/clark_result.csv`; }
+elsif($data_type eq "P"){ `mv $out_dir/P.result.csv $out_dir/clark_result.csv`; }
+elsif($data_type eq "SP"){
+	`cat $out_dir/S.result.csv $out_dir/P.result.csv > $out_dir/clark_result.csv`;
+	`rm $out_dir/S.result.csv $out_dir/P.result.csv`;
+}
+print STDERR "[CMD] $Bin/clark_to_meta-input.pl $out_dir/clark_result.csv $link_file $out_dir/metainput\n";
+`$Bin/clark_to_meta-input.pl $out_dir/clark_result.csv $link_file $out_dir/metainput`;
