@@ -100,7 +100,7 @@ Running TAMA
 
 * Options of running TAMA
 
-        ./TAMA.pl -p 30 -o ./ExampleTest --param examples/params.example -t True
+        ./TAMA.pl
         
         Usage: ./TAMA.pl [option] --param param.txt 
         Options:
@@ -210,8 +210,7 @@ TAMA output
    
 * Read classification profile
 
-        - File name: read_classi.*.out
-        ('*' is the input meta-score threshold (value of META-THRESHOLD parameter))
+        - File name: read_classi.out
         
         - File format: there are three columns without header line
             1. Input read sequence ID
@@ -223,6 +222,10 @@ TAMA output
 
         - File name: abundance_profile.*.out
         ('*' is the input meta-score threshold (value of META-THRESHOLD parameter))
+        * To generate the abundance profile,
+          filtered read classification profile is generated before abundance estimation.
+        * The filtered read classification profile: read_classi.*.out
+          ('*' is the input meta-score threshold (value of META-THRESHOLD parameter))
         
         - File format: there are seven columns with header line
             
@@ -250,6 +253,42 @@ TAMA output
 
 Create used customized reference database
 -----------------
+* Creating a custom database with example reference set
+        
+        ./src/Create_customDB.pl -ref ./examples/ref_list.example -names ./examples/names.dmp.gz -nodes ./examples/nodes.dmp.gz -o example_db
+        
+
+* Options of running TAMA
+
+        ./src/Create_customDB.pl -h
+        
+        Usage: ./Create_customDB.pl -ref <reference list> -names <names.dmp> -nodes <nodes.dmp> -o <output directory>
+        -ref       <reference list>
+          This file must have paths of reference genome sequence file and their taxon ID in two separated column with '\t'.
+        -names     <names.dmp>
+          Enter the NCBI names.dmp file has the information of scientific names.
+        -nodes     <nodes.dmp>
+          Enter the NCBI nodes.dmp file has the information of taxonomy tree.
+        -o | -out  <output directory name>  A directory with this name will be created into '[path of TAMA]/DB'
+        -p | -cpu  <num of threads>
+        -rank      <target taxonomic rank>
+          Select one from species(default), genus, family, order, class, and phylum.
+        -h | -help Print this page.
+
+* Preparing input of generating custom database
+
+        * To create an integrated TAMA database, you have to prepare three input files.
+        1. The list of reference files and their taxon ID (user made)
+        - This file has to contain reference genome sequence file path and it's taxon ID in two column deliminated by '\t'
+        - Example:
+          GCF_000007365.fna.gz	438753
+          GCF_000007725.fna.gz	198804
+          GCF_000009605.fna.gz	224915
+          
+        2. Taxonomy names file (names.dmp file from NCBI taxonomy)
+        3. Taxonomy nodes file (nodes.dmp file from NCBI taxonomy)
+        - You can download names.dmp and nodes.dmp from NCBI (ftp://ftp.ncbi.nih.gov/pub/taxonomy)
+        - Also, you can use the names.dmp and the nodes.dmp files in examples directory of TAMA
 
 
 Third party tools
