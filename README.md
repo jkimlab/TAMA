@@ -111,7 +111,7 @@ Running TAMA
         
         * Before running this command, you have to set the integrated TAMA database.
         * How to set the integrated TAMA database is described above.
-        * (Please check!) This requires more than 155GB of memory.
+        * (Please check!) This requires more than 185GB of memory.
           (Loading database for CLARK: approximately 155GB, Kraken: approximately 184GB) 
 
 
