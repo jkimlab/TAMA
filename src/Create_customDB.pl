@@ -164,14 +164,14 @@ for(my $i = 0; $i <= $#files; $i++){
 		my $cur_taxid = $hs_db_input{$files[$i]};
 		while(1){
 				my $upper_taxid = $hs_nodes{$cur_taxid};
-				my $upper_rank = $hs_rank{$cur_taxid};
-				if($upper_taxid eq "1"){ last; }
-				if($upper_rank eq "species"){ $s = $upper_taxid; }
-				elsif($upper_rank eq "genus"){ $g = $upper_taxid; }
-				elsif($upper_rank eq "family"){ $f = $upper_taxid; }
-				elsif($upper_rank eq "order"){ $o = $upper_taxid; }
-				elsif($upper_rank eq "class"){ $c = $upper_taxid; }
-				elsif($upper_rank eq "phylum"){ $p = $upper_taxid; }
+				my $cur_rank = $hs_rank{$cur_taxid};
+				if($cur_taxid eq "1"){ last; }
+				if($cur_rank eq "species"){ $s = $cur_taxid; }
+				elsif($cur_rank eq "genus"){ $g = $cur_taxid; }
+				elsif($cur_rank eq "family"){ $f = $cur_taxid; }
+				elsif($cur_rank eq "order"){ $o = $cur_taxid; }
+				elsif($cur_rank eq "class"){ $c = $cur_taxid; }
+				elsif($cur_rank eq "phylum"){ $p = $cur_taxid; }
 				$cur_taxid = $upper_taxid;
 		}
 		print FCT "$cur_file\t$hs_db_input{$files[$i]}\t$s\t$g\t$f\t$o\t$c\t$p\n";
