@@ -58,16 +58,20 @@ Download and install
 
 * Running TAMA with an example dataset and an example reference database
 
-        ./setup.pl --example
-        bash Example_run.cmd.sh
+        * If you want to test whether the installation is successful,
+          set the prepared examples and run example command file.
         * (Please check!) This requires more than 30GB of memory.
         * This command file generates an example reference database and runs TAMA with an example dataset.  
 
+          
+        ./setup.pl --example
+        bash Example_run.cmd.sh
+        
 
 * Setting the integrated TAMA databases
 
         [ Download CLARK, Kraken, and Centrifuge databases ]
-        * 6 taxonomic rank of database is provided for the CLARK (default: species) 
+        * 6 taxonomic ranks of database are provided for the CLARK (default: species) 
         ./setup.pl --db (or ./setup.pl --db --species)
       
         * If you want to download the database of another taxonomic rank, please add taxonomic rank options
