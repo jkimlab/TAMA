@@ -58,7 +58,7 @@ Download and install
 
     * (Please check !) When you finish the installation, please add a path of jellyfish to PATH.
       If you miss it, every process associated with Kraken could be not appropriately worked, 
-      including creating database and taxonomy analysis.
+      including creating database and taxonomy analysis. (The jellyfish program is included in TAMA/tools directory)
 
         
 
