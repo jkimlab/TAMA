@@ -55,32 +55,7 @@ while(<FP>){
 		my $db_dir = $1;
 		$link_file = "$db_path/$db_dir/taxonomy_data/$taxonomy_rank.link";
 		$db_path .= "/$db_dir/CLARK";
-		`echo -T $db_path/targets.txt > .settings`;
-		my $db_rank = "";
-		if($taxonomy_rank eq "species"){ $db_rank = "custom_0"; }
-		elsif($taxonomy_rank eq "genus"){ $db_rank = "custom_1"; }
-		elsif($taxonomy_rank eq "family"){ $db_rank = "custom_2"; }
-		elsif($taxonomy_rank eq "order"){ $db_rank = "custom_3"; }
-		elsif($taxonomy_rank eq "class"){ $db_rank = "custom_4"; }
-		elsif($taxonomy_rank eq "phylum"){ $db_rank = "custom_5"; }
-		`echo -D $db_path/$db_rank >> .settings`;
-=pod
-		if($db_dir eq "tama"){
-			`perl $Bin/CLARK_maketarget.pl $taxonomy_rank`;
-			my $db_rank = "";
-			if($taxonomy_rank eq "species"){ $db_rank = "custom_0"; }
-			elsif($taxonomy_rank eq "genus"){ $db_rank = "custom_1"; }
-			elsif($taxonomy_rank eq "family"){ $db_rank = "custom_2"; }
-			elsif($taxonomy_rank eq "order"){ $db_rank = "custom_3"; }
-			elsif($taxonomy_rank eq "class"){ $db_rank = "custom_4"; }
-			elsif($taxonomy_rank eq "phylum"){ $db_rank = "custom_5"; }
-			`echo -T $db_path/targets.txt > .settings`;
-			`echo -D $db_path/$db_rank >> .settings`;
-		}
-		else{
-			`./set_targets.sh $db_path custom --$taxonomy_rank`;
-		}
-=cut
+		`./set_targets.sh $db_path custom --$taxonomy_rank`;
 	}
 	if($_ =~ /^>(\S+)/){ 
 		$out_dir = abs_path("$1/CLARK");
