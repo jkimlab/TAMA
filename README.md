@@ -297,7 +297,8 @@ Creating custom reference database
 
         * To create an integrated TAMA database, you have to prepare three input files.
         1. The list of reference files and their taxon ID (user made)
-        - This file has to contain reference genome sequence file path and it's taxon ID in two column deliminated by '\t'
+        - This file has to contain a pair of reference genome sequence file path and it's taxon ID
+          in two columns deliminated by '\t'
         - Example:
           GCF_000007365.fna.gz	438753
           GCF_000007725.fna.gz	198804
@@ -306,7 +307,7 @@ Creating custom reference database
         2. Taxonomy names file (names.dmp file from NCBI taxonomy)
         3. Taxonomy nodes file (nodes.dmp file from NCBI taxonomy)
         - You can download names.dmp and nodes.dmp from NCBI (ftp://ftp.ncbi.nih.gov/pub/taxonomy)
-        - Also, you can use the names.dmp and the nodes.dmp files in examples directory of TAMA
+        - Also, you can use the names.dmp and the nodes.dmp files in the examples directory of TAMA
 
 
 Third party tools
