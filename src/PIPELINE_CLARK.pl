@@ -49,7 +49,6 @@ while(<FP>){
 	chomp;
 	if($_ =~ /^RANK=(\S+)/){
 		$taxonomy_rank = lc($1);
-#		$link_file = "$db_path/taxonomy_data/$taxonomy_rank.link";
 	}
 	if($_ =~ /^DBNAME=(\S+)/){
 		my $db_dir = $1;
