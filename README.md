@@ -67,6 +67,7 @@ Download and install
           runs TAMA with an example dataset.  
           
         ./setup.pl --example
+        source ./src/env.sh 
         bash Example_run.cmd.sh
         
 
@@ -271,7 +272,15 @@ Creating custom reference database
 -----------------
 * Creating a custom database with example reference set
         
+        source ./src/env.sh
         ./src/Create_customDB.pl -ref ./examples/ref_list.example -names ./examples/names.dmp.gz -nodes ./examples/nodes.dmp.gz -o example_db
+        
+        
+        * Please add the path of jellyfish to your PATH or run the code below before running Create_customDB.pl
+        
+        source ./src/env.sh
+        
+        * If you miss this step, creating Kraken database would be failed.
         
 
 * Options of running the creating custom database
