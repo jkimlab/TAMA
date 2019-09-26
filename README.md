@@ -19,7 +19,7 @@ System requirements (tested versions)
 
 * Required system resources
 
-        Based on the species rank anlaysis, using the included example dataset,
+        When running TAMA based on the species rank analysis, using the included example dataset,
         - Disk: (approximately) 300GB 
                 * CLARK: 88GB, Kraken: 188GB, Centrifuge: 9.6GB
         - Memory: (approximately) 185GB 
@@ -55,20 +55,13 @@ Download and install
         [Run a container]
         docker run -it [image_name] /bin/bash
         
-
-        ! PLEASE CHECK !
-        * When you finish the installation, please add a path of jellyfish to PATH.
-        * If you miss it, every process associated with Kraken could be not appropriately worked, 
-          including creating database and taxonomy analysis.
-        * (The jellyfish program is included in TAMA/tools directory)
-
         
 
 * Running TAMA with an example dataset and an example reference database
 
         * If you want to test whether the installation is successful,
           set the prepared examples and run example command file.
-        * (Please check!) This requires more than 30GB of memory.
+        * [ PLEASE CHECK! ] This requires more than 30GB of memory.
         * This command file generates an example reference database and
           runs TAMA with an example dataset.  
           
@@ -86,13 +79,15 @@ Download and install
         * If you want to analyze with other taxonomic ranks,
           you need to download additional databases using taxonomic rank options. 
           please add taxonomic rank options
-        * Example: target taxonomic rank: species, genus, phylum 
+        * Example:
+          If you want to analyze with species, genus, and phylum,
+          run the setup.pl with below options.
         
         ./setup.pl --db --species --genus --phylum
 
         
 * Before downloading the database, please check the required disk space 
-(To download and set the databases, you need to prepare about twice as much storage space.)
+(To download and set the databases, you need to prepare about twice as much storage space, respectively.)
 
 | Tool       | Species | Genus | Family | Order | Class | Phylum |
 | :----:     | :-----: | :---: | :----: | :---: | :---: | :----: |
@@ -113,7 +108,7 @@ Running TAMA
         
         * Before running this command, you have to set the integrated TAMA database.
         * How to set the integrated TAMA database is described above.
-        * (Please check!) This requires more than 185GB of memory.
+        * [ PLEASE CHECK! ] This requires more than 185GB of memory.
           (Loading database for CLARK: approximately 155GB, Kraken: approximately 184GB) 
 
 
@@ -232,9 +227,9 @@ TAMA output
         - File name: read_classi.out
         
         - File format: there are three columns without header line
-            1. Input read sequence ID
-            2. Assigned taxon ID (or IDs)
-            3. Meta-score
+            Column 1: Input read sequence ID
+            Column 2: Assigned taxon ID (or IDs)
+            Column 3: Meta-score
 
 
 * Relative species abundance profile
@@ -278,7 +273,7 @@ Creating custom reference database
         ./src/Create_customDB.pl -ref ./examples/ref_list.example -names ./examples/names.dmp.gz -nodes ./examples/nodes.dmp.gz -o example_db
         
 
-* Options of running TAMA
+* Options of running the creating custom database
 
         ./src/Create_customDB.pl -h
         
@@ -295,7 +290,7 @@ Creating custom reference database
           Select one from species(default), genus, family, order, class, and phylum.
         -h | -help Print this page.
 
-* Preparing input of generating custom database
+* Preparing input for generating custom database
 
         * To create an integrated TAMA database, you have to prepare three input files.
         1. The list of reference files and their taxon ID (user made)
@@ -305,6 +300,7 @@ Creating custom reference database
           GCF_000007365.fna.gz	438753
           GCF_000007725.fna.gz	198804
           GCF_000009605.fna.gz	224915
+        - Also, you can see an example in the examples directory of TAMA (ref_list.example)
           
         2. Taxonomy names file (names.dmp file from NCBI taxonomy)
         3. Taxonomy nodes file (nodes.dmp file from NCBI taxonomy)
