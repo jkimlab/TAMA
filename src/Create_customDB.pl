@@ -206,6 +206,7 @@ print FLOG "Creating Centrifuge DB\n\t$out_dir/centrifuge\n";
 print STDERR "All finished !\n";
 print FLOG "All finished !\n";
 close(FLOG);
+`rm -rf $out_dir/tmp`;
 ####### HELP !
 sub PRINT_HELP{
 		my $src = basename($0);
