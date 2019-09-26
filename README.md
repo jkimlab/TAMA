@@ -19,7 +19,8 @@ System requirements (tested versions)
 
 * Required system resources
 
-        When running TAMA based on the species rank analysis, using the included example dataset,
+        When you run TAMA based on the species rank analysis using the included example dataset,
+        you need to prepare resources as below.
         - Disk: (approximately) 300GB 
                 * CLARK: 88GB, Kraken: 188GB, Centrifuge: 9.6GB
         - Memory: (approximately) 185GB 
@@ -80,8 +81,8 @@ Download and install
           you need to download additional databases using taxonomic rank options. 
           please add taxonomic rank options
         * Example:
-          If you want to analyze with species, genus, and phylum,
-          run the setup.pl with below options.
+          If you want to analyze by species rank, genus rank, and phylum rank,
+          run the setup.pl with below options for setting each database.
         
         ./setup.pl --db --species --genus --phylum
 
@@ -108,7 +109,7 @@ Running TAMA
         
         * Before running this command, you have to set the integrated TAMA database.
         * How to set the integrated TAMA database is described above.
-        * [ PLEASE CHECK! ] This requires more than 185GB of memory.
+        * **[ PLEASE CHECK! ]** This requires more than 185GB of memory.
           (Loading database for CLARK: approximately 155GB, Kraken: approximately 184GB) 
 
 
