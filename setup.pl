@@ -35,6 +35,8 @@ if(defined($check)){
 elsif(defined($tool_install)){
 	print STDERR "** Install all tools of TAMA package..\n";
 	`$Bin/src/install_tools.sh`;
+	my $tool_path = abs_path("$Bin/tools");
+	`echo export PATH=\$PATH:$tool_path > $Bin/src/env.sh`;
 }
 elsif(defined($uninstall)){
 	print STDERR "** Uninstall all tools of TAMA package..\n";
