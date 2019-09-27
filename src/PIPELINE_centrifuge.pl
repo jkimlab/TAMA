@@ -126,8 +126,8 @@ if(-e "$DB_file")
 			if($type eq "single")
 			{
 				print "Read type: $type\n";
-				print "$centrifuge_path/centrifuge -x $db_path/$db_name/centrifuge/database -k 100000 -p $cpu -U $hs_inputs{$path}{$type} --report-file $type\_report -S $type\_classification >& $type.log\n\n";
-				`$centrifuge_path/centrifuge -x $db_path/$db_name/centrifuge/database -k 100000 -p $cpu -U $hs_inputs{$path}{$type} --report-file $type\_report -S $type\_classification >& $type.log`;
+				print "$centrifuge_path/centrifuge -x $db_path/$db_name/centrifuge/database -k 100000 -p $cpu -U $hs_inputs{$path}{$type} --report-file $type\_report -S $type\_classification 2> $type.log\n\n";
+				`$centrifuge_path/centrifuge -x $db_path/$db_name/centrifuge/database -k 100000 -p $cpu -U $hs_inputs{$path}{$type} --report-file $type\_report -S $type\_classification 2> $type.log`;
 				`$Bin/centrifuge_to_meta-input_single.pl $type\_classification $Bin/../DB/$db_name/taxonomy_data/$rank.link $hs_inputs{$path}{$type} > metainput.single`;
 				$stype = 1;
 			}
@@ -135,8 +135,8 @@ if(-e "$DB_file")
 			{
 				print "Read type: $type\n";
 				my @pair = split(/\s+/,$hs_inputs{$path}{$type});
-				print "$centrifuge_path/centrifuge -x $db_path/$db_name/centrifuge/database -k 100000 -p $cpu -1 $pair[0] -2 $pair[1] --report-file $type\_report -S $type\_classification >& $type.log\n\n";;
-				`$centrifuge_path/centrifuge -x $db_path/$db_name/centrifuge/database -k 100000 -p $cpu -1 $pair[0] -2 $pair[1] --report-file $type\_report -S $type\_classification >& $type.log`;
+				print "$centrifuge_path/centrifuge -x $db_path/$db_name/centrifuge/database -k 100000 -p $cpu -1 $pair[0] -2 $pair[1] --report-file $type\_report -S $type\_classification 2> $type.log\n\n";;
+				`$centrifuge_path/centrifuge -x $db_path/$db_name/centrifuge/database -k 100000 -p $cpu -1 $pair[0] -2 $pair[1] --report-file $type\_report -S $type\_classification 2> $type.log`;
 				`$Bin/centrifuge_to_meta-input_paired.pl $type\_classification $Bin/../DB/$db_name/taxonomy_data/$rank.link $pair[0] $pair[1] > metainput.paired`;
 				$ptype = 1;
 			}
