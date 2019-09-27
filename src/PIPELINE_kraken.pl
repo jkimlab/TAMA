@@ -117,14 +117,14 @@ for (my $i=0; $i<=$#outdirs; $i++){
 	if (exists $single_r[$i]){
 		if ($single_r[$i]  ne " "){
 			print "\tSingle";
-			`$kraken/kraken --preload --db $database --threads $threads --output $split_name[-1].single --fastq-input $single_r[$i] >& $split_name[-1].single.log`;
+			`$kraken/kraken --preload --db $database --threads $threads --output $split_name[-1].single --fastq-input $single_r[$i] 2> $split_name[-1].single.log`;
 		}
 	}
 	
 	if (exists $paired_1[$i] && exists $paired_2[$i]){
 		if ($paired_1[$i] ne " " && $paired_2[$i] ne " "){
 			print "\tPaired";
-			`$kraken/kraken --preload --db $database --threads $threads --output $split_name[-1].paired --fastq-input --paired $paired_1[$i] $paired_2[$i] >& $split_name[-1].paired.log`;
+			`$kraken/kraken --preload --db $database --threads $threads --output $split_name[-1].paired --fastq-input --paired $paired_1[$i] $paired_2[$i] 2> $split_name[-1].paired.log`;
 		}
 	}
 
