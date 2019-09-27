@@ -28,16 +28,16 @@ System requirements (tested versions)
                   especially CLARK and Kraken
         
 
-Download and install
+Download and installation
 -----------------
 
-* Download
+* Downloading TAMA
 
         git clone https://github.com/jkimlab/TAMA.git
         cd TAMA
     
     
-    (1) Install by source code
+    (1) Installing by source code
 
         [ Check the required perl libraries ]
         ./setup.pl --check
@@ -48,13 +48,14 @@ Download and install
         [ Uninstall TAMA package ]
         ./setup.pl --uninstall
 
-    (2) Install by docker (https://www.docker.com/)
+    (2) Installing by docker (https://www.docker.com/)
     
         [Build docker image]
         docker build -t [image_name] .
         
         [Run a container]
         docker run -it [image_name] /bin/bash
+        cd TAMA
         
         
 
