@@ -53,6 +53,7 @@ print STDERR "\t[1] Constructing data structure ..\n";
 print FLOG "\t[1] Constructing data structure ..\n";
 `mkdir -p $out_dir/CLARK/Custom $out_dir/tmp $out_dir/centrifuge $out_dir/kraken/taxonomy $out_dir/taxonomy_data`;
 `cp $in_names $in_nodes $out_dir/taxonomy_data`;
+`gunzip $Bin/../examples/sample1.1.fq.gz`;
 my %hs_ref = ();
 if($in_ref_list =~ /.gz$/){ open(FLIST, "gunzip -c $in_ref_list |"); }
 else{ open(FLIST, "$in_ref_list"); }
@@ -181,7 +182,7 @@ close(FCT);
 close(FCA);
 chdir($clark_path);
 `./set_targets.sh $out_dir/CLARK custom --$target_rank`;
-`./classify_metagenome.sh -k 31 -O /mss2/projects/META2/taxonomy_classification/TAMA_examples/sample1.1.fq -R $out_dir/tmp/CLARK_testout -n $in_cpu -m 0`;
+`./classify_metagenome.sh -k 31 -O $Bin/../examples/sample1.1.fq -R $out_dir/tmp/CLARK_testout -n $in_cpu -m 0`;
 ####### Making kraken db
 `cat $out_dir/CLARK/Custom/*.fa > $out_dir/tmp/custom_ref.fa`;
 `rm -rf $out_dir/CLARK/Custom`;
@@ -195,18 +196,19 @@ if($in_names =~ /.gz$/){ `gunzip -c $in_names > $out_dir/kraken/taxonomy/names.d
 else{ `cp $in_names $out_dir/kraken/taxonomy/names.dmp`; }
 `$kraken_path/kraken-build --add-to-library $out_dir/tmp/custom_ref.fa --db $out_dir/kraken`;
 `$kraken_path/kraken-build --build --db $out_dir/kraken --kmer-len 31 --threads $in_cpu`;
-`$kraken_path/kraken --db $out_dir/kraken /mss2/projects/META2/taxonomy_classification/TAMA_examples/sample1.1.fq --threads $in_cpu > $out_dir/tmp/kraken_testout`;
+`$kraken_path/kraken --db $out_dir/kraken $Bin/../examples/sample1.1.fq --threads $in_cpu > $out_dir/tmp/kraken_testout`;
 print STDERR "Done.\n";
 print FLOG "Done.\n";
 ####### Making centrifuge db
 print STDERR "Creating Centrifuge DB\n\t$out_dir/centrifuge\n";
 print FLOG "Creating Centrifuge DB\n\t$out_dir/centrifuge\n";
 `$centrifuge_path/centrifuge-build -p $in_cpu --conversion-table $out_dir/centrifuge/seqid2taxid.map --taxonomy-tree $out_dir/kraken/taxonomy/nodes.dmp --name-table $out_dir/kraken/taxonomy/names.dmp $out_dir/tmp/custom_ref.fa $out_dir/centrifuge/database >& $out_dir/centrifuge/centrifuge-build.log`;
-`$centrifuge_path/centrifuge -x $out_dir/centrifuge/database -k 100000 -p $in_cpu -U /mss2/projects/META2/taxonomy_classification/TAMA_examples/sample1.1.fq --report-file $out_dir/tmp/centrifuge_testout_report -S $out_dir/tmp/centrifuge_testout_classification >& $out_dir/tmp/centrifuge_testout.log`;
+`$centrifuge_path/centrifuge -x $out_dir/centrifuge/database -k 100000 -p $in_cpu -U $Bin/../examples/sample1.1.fq --report-file $out_dir/tmp/centrifuge_testout_report -S $out_dir/tmp/centrifuge_testout_classification >& $out_dir/tmp/centrifuge_testout.log`;
 print STDERR "All finished !\n";
 print FLOG "All finished !\n";
 close(FLOG);
-`rm -rf $out_dir/tmp`;
+#`rm -rf $out_dir/tmp`;
+`gzip $Bin/../examples/sample1.1.fq`;
 ####### HELP !
 sub PRINT_HELP{
 		my $src = basename($0);
