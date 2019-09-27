@@ -202,8 +202,8 @@ print FLOG "Done.\n";
 ####### Making centrifuge db
 print STDERR "Creating Centrifuge DB\n\t$out_dir/centrifuge\n";
 print FLOG "Creating Centrifuge DB\n\t$out_dir/centrifuge\n";
-`$centrifuge_path/centrifuge-build -p $in_cpu --conversion-table $out_dir/centrifuge/seqid2taxid.map --taxonomy-tree $out_dir/kraken/taxonomy/nodes.dmp --name-table $out_dir/kraken/taxonomy/names.dmp $out_dir/tmp/custom_ref.fa $out_dir/centrifuge/database >& $out_dir/centrifuge/centrifuge-build.log`;
-`$centrifuge_path/centrifuge -x $out_dir/centrifuge/database -k 100000 -p $in_cpu -U $Bin/../examples/sample1.1.fq --report-file $out_dir/tmp/centrifuge_testout_report -S $out_dir/tmp/centrifuge_testout_classification >& $out_dir/tmp/centrifuge_testout.log`;
+`$centrifuge_path/centrifuge-build -p $in_cpu --conversion-table $out_dir/centrifuge/seqid2taxid.map --taxonomy-tree $out_dir/kraken/taxonomy/nodes.dmp --name-table $out_dir/kraken/taxonomy/names.dmp $out_dir/tmp/custom_ref.fa $out_dir/centrifuge/database 2> $out_dir/centrifuge/centrifuge-build.log`;
+`$centrifuge_path/centrifuge -x $out_dir/centrifuge/database -k 100000 -p $in_cpu -U $Bin/../examples/sample1.1.fq --report-file $out_dir/tmp/centrifuge_testout_report -S $out_dir/tmp/centrifuge_testout_classification 2> $out_dir/tmp/centrifuge_testout.log`;
 print STDERR "All finished !\n";
 print FLOG "All finished !\n";
 close(FLOG);
