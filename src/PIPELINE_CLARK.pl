@@ -55,35 +55,38 @@ while(<FP>){
 		$link_file = "$db_path/$db_dir/taxonomy_data/$taxonomy_rank.link";
 		$db_path .= "/$db_dir/CLARK";
 		my $db_address = "$db_path";
-		my $target_index = "";
-		if($taxonomy_rank eq "species"){
-				$db_address .= "/custom_0";
-				if($db_dir eq "tama"){ `cat $db_path/taxonomy/species_targets.txt > $db_path/targets.txt`; }
+		if($db_dir ne "tama"){ `./set_targets.sh $db_path custom --$taxonomy_rank`; }
+		else{
+				my $target_index = "";
+				if($taxonomy_rank eq "species"){
+						$db_address .= "/custom_0";
+						`cat $db_path/taxonomy/species_targets.txt > $db_path/targets.txt`;
+				}
+				elsif($taxonomy_rank eq "genus"){
+						$db_address .= "/custom_1";
+						`cat $db_path/taxonomy/genus_targets.txt > $db_path/targets.txt`;
+				}
+				elsif($taxonomy_rank eq "family"){
+						$db_address .= "/custom_2";
+						`cat $db_path/taxonomy/family_targets.txt > $db_path/targets.txt`;
+				}
+				elsif($taxonomy_rank eq "order"){
+						$db_address .= "/custom_3";
+						`cat $db_path/taxonomy/order_targets.txt > $db_path/targets.txt`;
+				}
+				elsif($taxonomy_rank eq "class"){
+						$db_address .= "/custom_4";
+						`cat $db_path/taxonomy/class_targets.txt > $db_path/targets.txt`;
+				}
+				elsif($taxonomy_rank eq "phylum"){
+						$db_address .= "/custom_5";
+						`cat $db_path/taxonomy/phylum_targets.txt > $db_path/targets.txt`;
+				}
+				`echo $db_path > ./.DBDirectory`;
+				`echo $db_address > .dbAddress`;
+				`echo -T $db_path/targets.txt > .settings`;
+				`echo -D $db_address/ >> .settings`;
 		}
-		elsif($taxonomy_rank eq "genus"){
-				$db_address .= "/custom_1";
-				if($db_dir eq "tama"){ `cat $db_path/taxonomy/genus_targets.txt > $db_path/targets.txt`; }
-		}
-		elsif($taxonomy_rank eq "family"){
-				$db_address .= "/custom_2";
-				if($db_dir eq "tama"){ `cat $db_path/taxonomy/family_targets.txt > $db_path/targets.txt`; }
-		}
-		elsif($taxonomy_rank eq "order"){
-				$db_address .= "/custom_3";
-				if($db_dir eq "tama"){ `cat $db_path/taxonomy/order_targets.txt > $db_path/targets.txt`; }
-		}
-		elsif($taxonomy_rank eq "class"){
-				$db_address .= "/custom_4";
-				if($db_dir eq "tama"){ `cat $db_path/taxonomy/class_targets.txt > $db_path/targets.txt`; }
-		}
-		elsif($taxonomy_rank eq "phylum"){
-				$db_address .= "/custom_5";
-				if($db_dir eq "tama"){ `cat $db_path/taxonomy/phylum_targets.txt > $db_path/targets.txt`; }
-		}
-		`echo $db_path > ./.DBDirectory`;
-		`echo $db_address > .dbAddress`;
-		`echo -T $db_path/targets.txt > .settings`;
-		`echo -D $db_address/ >> .settings`;
 	}
 	if($_ =~ /^>(\S+)/){ 
 		$out_dir = abs_path("$1/CLARK");
