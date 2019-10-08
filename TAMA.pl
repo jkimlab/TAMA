@@ -68,6 +68,7 @@ while(<FPA>){
 				}
 				my ($option, $file) = split(/=/,$line);
 				$option = substr($option, 1);
+				if(!defined($file)){ next; }
 				if($file eq ""){ next; }
 				if(!-f $file || !-e $file){
 					print STDERR "[Error] There is no proper input file.\n";
