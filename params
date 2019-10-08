@@ -30,16 +30,16 @@ $DBNAME=tama
 # You need to separate each dataset with '>' symbol. The name of each dataset should be described after '>'. The dataset could have multiple number of inpu sequence files. All the sequence files will be treated as an input to the current dataset until the next '>' symbol.
 >sample1
 # PAIRED1 and PAIRED2 parameter are the forward and reverse strand reads of a pair of paired-end sequencing read. If you have multiple sequence files, you should write a list of files by concatenating ',' or write them in multiple lines.
-$PAIRED1=examples/sample1.1.fq
-$PAIRED2=examples/sample1.2.fq
+$PAIRED1=examples/sample1.1.fq.gz
+$PAIRED2=examples/sample1.2.fq.gz
 $PAIRED1=
 $PAIRED2=
 # SINGLE parameter is the single-end read file. If you have multiple sequence files, you should write a list of files by concatenating ',' or write them in multiple lines.
 $SINGLE=
 
 >sample2
-$PAIRED1=examples/sample2.1.fq
-$PAIRED2=examples/sample2.2.fq
+$PAIRED1=examples/sample2.1.fq.gz
+$PAIRED2=examples/sample2.2.fq.gz
 $SINGLE=
 
 [Preprocessing]
