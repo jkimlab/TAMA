@@ -8,7 +8,7 @@ System requirements (tested versions)
 * Programs
 
         - perl (v5.22.1)
-        - phython (2.7.12)
+        - python (2.7.12)
         - java (1.8.0)
         - git (2.7.4)
         - gcc, g++ (5.4.0)
