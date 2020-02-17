@@ -35,9 +35,24 @@ Download and installation
 
         git clone https://github.com/jkimlab/TAMA.git
         cd TAMA
+   
+* Installing TAMA
+
+    [[ RECOMMENDED ]]
+         
+        * Installing by docker (https://www.docker.com/)
     
-    
-    (1) Installing by source code
+        [Build docker image]
+        docker build -t [image_name] .
+        
+        [Run a container]
+        docker run -it [image_name] /bin/bash
+        cd TAMA
+     
+     [ Additional ]
+     
+        * Installing by source code
+          (We recommend installing it by docker.)
 
         [ Check the required perl libraries ]
         ./setup.pl --check
@@ -47,18 +62,7 @@ Download and installation
 
         [ Uninstall TAMA package ]
         ./setup.pl --uninstall
-
-    (2) Installing by docker (https://www.docker.com/)
-    
-        [Build docker image]
-        docker build -t [image_name] .
-        
-        [Run a container]
-        docker run -it [image_name] /bin/bash
-        cd TAMA
-        
-        
-
+  
 * Running TAMA with an example dataset and an example reference database
 
         * If you want to test whether the installation is successful,
@@ -100,6 +104,10 @@ Download and installation
 | :----:     | :----: |
 | Kraken     | 188 GB |
 | Centrifuge | 9.6 GB |
+
+
+
+      
 
 
 Running TAMA
