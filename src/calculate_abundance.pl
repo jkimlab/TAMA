@@ -89,6 +89,7 @@ if($rank eq "species"){
 ##### Calculate abundances #####
 foreach my $sample_name (natsort keys %multi_sample){
 	my %hs_tax = ();
+	$hs_tax{'NA'}=0;
 	my $total_gi_size = 0;
 	my $meta_out_f = $input_f;
 	if(!-f $meta_out_f){next;}
