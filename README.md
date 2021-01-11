@@ -337,6 +337,11 @@ Third party tools
 * Centrifuge (https://ccb.jhu.edu/software/centrifuge/)
 
 
+How to cite
+-----------
+Sim M, Lee J, Lee D, Kwon D, Kim J. TAMA: improved metagenomic sequence classification through meta-analysis. BMC Bioinformatics. 2020 May 12;21(1):185. doi: 10.1186/s12859-020-3533-7.
+
+
 Contact
 -----------------
 E-mail: bioinfolabkr@gmail.com
