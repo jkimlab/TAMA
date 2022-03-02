@@ -14,6 +14,7 @@ System requirements (tested versions)
         - gcc, g++ (5.4.0)
         - make (GNU Make 4.1)
         - zip (3.0)
+        - unzip (6.00)
         - curl (7.47.0)
         - Sort::Key::Natural (perl library)
 
